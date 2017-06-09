@@ -1,0 +1,93 @@
+<style>
+  * {
+    color: white;
+  }
+  .container {
+    background-color: #495057;
+    padding-bottom: 10px;
+  }
+  textarea {
+    resize: none;
+    margin-bottom: 20px;
+  }
+  h1 {
+    text-align: center;
+  }
+  .date_form{
+    width: 200px;
+    float: left;
+    margin-right: 30px;
+  }
+  .form-date {
+    float: left;
+    margin-right: 30px;
+  }
+  .form-Job {
+    clear: both;
+  }
+
+  .list-date {
+    width: 100px;
+  }
+  .list-writer {
+    width: 150px;
+  }
+  .list-job {
+    width: 200px;
+  }
+  .list-content {
+    width: 400px;
+    border: none;
+    background-color: transparent;
+  }
+  .last_td {
+    text-align: right;
+  }
+  #del {
+  float:right;
+  }
+  .btn {
+    width: 67px;
+  }
+  a:hover, a:visited, a:link {
+    color: white;
+    text-decoration: none;
+  }
+  ._pagination {
+    text-align: center;
+    margin-bottom : 10px;
+  }
+
+</style>
+<div class="container">
+  <h1><a href="/home/index">Travel List</a></h1>
+
+  <!--<form method="get" action="/home/create">-->
+  <a class="btn btn-info" href="/home/new">Review</a>
+
+
+  <div class="row">
+    <% @posts.each do |post| %>
+        <div class="col-md-4 portfolio-item">
+          <h3>
+            <a href="/home/read/<%=post.id%>">[<%=post.abroad%>] <%=post.place%></a>
+          </h3>
+          <a href="/home/read/<%=post.id %>">
+            <img class="img-responsive" src=<%=post.img_thumb.to_s%> alt="">
+          </a>
+          <span>Date:<%=post.start_date%>~<%=post.end_date%></span><br>
+          <span>Writer:<%=post.user.email%></span><br>
+          <span>Theme:<%=post.theme%></span>
+          <%if current_user==post.user %>
+          <a class="btn btn-danger" id="del" href="/home/destroy/<%=post.id%>">Delete</a>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+

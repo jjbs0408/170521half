@@ -1,0 +1,99 @@
+<style>
+  * {
+    color: white;
+  }
+  .container {
+    background-color: #495057;
+    padding-bottom: 20px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+    #input_size1{
+      width: 40%;
+      float: left;
+    }
+    #input_size2{
+      width: 40%;
+      float: left;
+      clear: both;
+    }
+  #travelplace{
+    width:40%;
+  }
+  #content{
+    width:40%;
+  }
+
+  a:hover, a:visited, a:link {
+    color: white;
+    text-decoration: none;
+  }
+</style>
+
+<div class="container">
+  <form method="post" action="/home/create" enctype="multipart/form-data">
+    <div class="form-group form-date">
+      <h1><a href="/home/index">Travel List</a></h1>
+
+      <label for="date">테마</label>
+      <br>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox1"  name="theme" value="힐링"> 힐링
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" name="theme" value="먹방"> 먹방
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" name="theme" value="관광"> 관광
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" name="theme" value="기타"> 기타
+      </label>
+      <br>
+      <br>
+
+      <div>
+        <p>여행시작</p>
+        <input type="date" class="form-control date_form" id="input_size1" name="start_date" required> <br>
+        <br>
+        <p>여행종료</p>
+        <input type="date" class="form-control date_form" id="input_size2" name="end_date" required>
+      </div>
+      <br>
+      <br>
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="exampleInputName2">여행지</label>
+        <input type="text" name="place" maxlength="10" id="travelplace" class="form-control" placeholder="여행지">
+
+
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox1"  name="abroad" value="국내"> 국내
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" name="abroad" value="국외"> 국외
+      </label>
+      </div>
+      </div>
+
+    <div class="form-group">
+      <label for="img">사진첨부</label>
+      <input type="file" name="img" id="exampleInputFile">
+    </div>
+
+    <div class="form-group form-Job">
+      <label for="title">제목</label>
+      <input name="title" id="content" class="form-control" placeholder="Please enter your Job" required>
+    </div>
+
+    <div class="form-group">
+      <label for="content">리뷰</label>
+      <textarea name="content"  class="form-control" rows="8" placeholder="Please enter your details"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

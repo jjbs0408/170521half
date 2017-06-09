@@ -1,0 +1,165 @@
+
+<style>
+  * {
+    color: white;
+  }
+  #input_size1{
+    width:200px;
+  }
+  #input_size2{
+    width:200px;
+  }
+  .container {
+    background-color: #495057;
+    padding-bottom: 20px;
+  }
+  h1 {
+    text-align: center;
+  }
+  textarea {
+    resize: none;
+    margin-bottom: 20px;
+  }
+  .last_td {
+    text-align: right;
+  }
+  .date {
+    width: 180px;
+  }
+  .writer {
+    color: white;
+    font-size: 15px;
+    /*padding-top: 5px;*/
+  }
+  .form-date {
+    float: left;
+    margin-right: 20px;
+  }
+  .form-writer {
+    clear: both;
+    float: left;
+  }
+  .form-Job {
+    clear: both;
+  }
+  img {
+    display: block;
+    height: 300px;
+    width: auto;
+    cursor: pointer;
+  }
+  .list-content {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+  }
+  .write-content {
+    width: 100%;
+  }
+  .btn {
+    width: 67px;
+  }
+  a:hover, a:visited, a:link {
+    color: white;
+    text-decoration: none;
+  }
+  .slide-image{
+    margin: 0;
+    width: 400px;
+    height: auto;
+  }
+</style>
+
+<div class="container">
+  <h1><a href="/home/index">Travel List</a></h1>
+  <h2>[<%=@post.abroad%>] <%=@post.place%></h2>
+  <div class="row carousel-holder">
+
+    <div class="col-md-12">
+        <div class="carousel-inner">
+          <div class="item active">
+            <img class="slide-image" src="<%=@post.img%>" alt="">
+          </div>
+        </div>
+    </div>
+
+  </div><br><br>
+
+  <div class="form-group form-date">
+    <p>여행시작</p>
+    <input type="date" class="form-control date_form" id="input_size1" value="<%=@post.start_date%>" name="start_date" disabled> <br>
+  </div>
+  <div class="form-group form-date">
+    <p>여행종료</p>
+    <input type="date" class="form-control date_form" value="<%=@post.end_date%>" id="input_size2" name="end_date" disabled>
+  </div>
+  <div class="form-group form-writer">
+    <label for="writer">작성자</label>
+    <p name="writer" class="writer"><%=@post.user.email%></p>
+  </div>
+
+  <div class="form-group form-Job">
+    <label for="title">제목</label>
+    <input name="title" id="content" class="form-control" value="<%=@post.title%>" disabled>
+  </div>
+
+  <div class="form-group">
+    <label for="content">내용</label>
+    <textarea name="content" id="content" class="form-control" rows="10" disabled><%=@post.content%></textarea>
+  </div>
+
+
+
+  <br>
+
+  <h2>Reply</h2>
+  <form method= "get" action = "/home/read/<%= @post.id %>/comment_create">
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="write-content">Content</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <input type="text" name='content' class="form-control" maxlength="100" required>
+        </td>
+        <td class="last_td">
+          <button type="submit" class="btn btn-success">Write</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="width:200px">Writer</th>
+      <th class="list-content">Content</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @post.comments.each do |comment| %>
+        <tr>
+          <td>
+            <%=comment.user.email%>
+          </td>
+          <td>
+            <input type="text" class="list-content" value="<%=comment.content%>" disabled>
+          </td>
+          <td class="last_td">
+            <% if current_user == comment.user %>
+                <a class="btn btn-danger" href="/home/read/<%=comment.id%>/comment_destroy">Delete</a>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <button onclick="location.href='/home/index'" class="btn btn-primary">Back</button>
+</div>
